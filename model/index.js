@@ -1,6 +1,5 @@
 const fs = require('fs/promises')
 const path = require("path");
-// const contacts = require('./contacts.json')
 const contactsPath = path.join(__dirname, 'contacts.json');
 
 const readData = async () => {
@@ -15,9 +14,6 @@ const listContacts = async () => {
 const getContactById = async (contactId) => {
   const contacts = await listContacts()
   const selectContact = contacts.find(item => item.id === Number(contactId))
-    //   if (!selectContact) {
-    //     throw new Error(`Contacts with id= ${contactId} not found`)
-    // }
       return selectContact; 
 }
 
@@ -25,7 +21,6 @@ const removeContact = async (contactId) => {
     const contacts = await listContacts();
     const idx = contacts.findIndex(item => item.id === Number(contactId));
     if (idx === -1) {
-      // throw new Error(`Contact with id=${contactId} not found`);
       return null
     }
   const delContact = contacts.splice(idx, 1);
@@ -51,19 +46,9 @@ const updateContact = async (contactId, body) => {
     return null
   }
   contacts[idx] = { ...contacts[idx], ...body }
-  // const upContact = contacts.splice(idx, 1);
   await fs.writeFile(contactsPath, JSON.stringify(contacts))
   return contacts[idx]
 }
-
-// -----рабочая версия---------
-//   const [result] = contacts.filter((contact) => contact.id === Number(contactId))
-//   if (result) {
-//     Object.assign(result, body)
-//     await fs.writeFile(contactsPath, JSON.stringify(contacts))
-//   }
-//   return result
-// }
 
 module.exports = {
   listContacts,
