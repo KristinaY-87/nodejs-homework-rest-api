@@ -1,5 +1,5 @@
 const fs = require('fs/promises');
-const contactsPath = require('./contactsPath');
+const contactsPath = require('../../db/contactsPath');
 const listContacts = require('./listContacts');
 
 const addContact = async (body) => {

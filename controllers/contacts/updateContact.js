@@ -1,6 +1,6 @@
 
-const contactsModel = require('../model/contacts')
-const { contactUpdateSchema} = require('../routes/api/validation/contactSchema')
+const contactsModel = require('../../model/contacts')
+const { contactUpdateSchema} = require('../../routes/api/validation/contactSchema')
 
 const updateContact = async (req, res, next) => {
   try {
