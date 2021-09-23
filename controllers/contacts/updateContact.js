@@ -1,7 +1,7 @@
 const { Contact } = require("../../models/contacts");
 
 const updateContact = async (req, res, next) => {
-try {
+try{
   const contact = await Contact.findByIdAndUpdate(req.params.contactId, req.body, {new: true})
      if (!contact) {
     return res.status(404).json({
@@ -10,9 +10,9 @@ try {
      }
      return res.json({contact})
 }
-catch (error) {
-        next(error);
-    }
+  catch (error) {
+    next(error);
+  }
 }
 
 module.exports = updateContact;

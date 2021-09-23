@@ -11,7 +11,7 @@ const removeContact = async (req, res, next) => {
     res.json({
       status: 'success', code: 200, "message": "contact deleted"
     })
-  }
+ }
   catch (error) {
     next(error);
   }
