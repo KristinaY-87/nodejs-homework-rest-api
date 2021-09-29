@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const { Schema, model } = require("mongoose");
 const Joi = require("joi")
+const { v4 } = require('uuid');
 
 const userSchema = Schema({
 password: {
@@ -24,6 +25,14 @@ password: {
   avatarURL: {
     type: String,
     default: "",
+  },
+  verify: {
+    type: Boolean,
+    default: false,
+  },
+  verifyToken: {
+    type: String,
+    required: [true, 'Verify token is required'],
   }
 }, { versionKey: false, timestamps: true });
 
@@ -35,6 +44,9 @@ userSchema.methods.comparePassword = function (password) {
   return bcrypt.compareSync(password, this.password)
 }
 
+userSchema.methods.createVerifyToken = function () {
+  this.verifyToken = v4();
+}
 
 const joiSchema = Joi.object({
     password: Joi.string().required(),

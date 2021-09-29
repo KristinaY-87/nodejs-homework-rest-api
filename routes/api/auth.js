@@ -16,4 +16,8 @@ router.get('/current', ctrlWrapper(authenticate), ctrlWrapper(ctrl.current));
 
 router.patch('/avatars', ctrlWrapper(authenticate), upload.single('avatar'), ctrlWrapper(ctrl.updateAvatar))
 
+router.get('/verify/:verifyToken', ctrlWrapper(ctrl.verify))
+
+router.post('/verify', ctrlWrapper(ctrl.sendAgain))
+
 module.exports = router;
